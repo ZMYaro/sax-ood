@@ -5,28 +5,51 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<script type="text/javascript">
-			// Cycle GIFs when the image is clicked.
 			var oodPics = ["got_them_moves", "ood2", "ood1"],
-				oodPicNum = 0;
+				oodPicNum = 0,
+				musicPlayer,
+				unmuteButton;
 			function nextOodPic() {
+				// Cycle GIFs when the image is clicked.
 				oodPicNum = ++oodPicNum >= oodPics.length ? 0 : oodPicNum;
 				this.src = 'images/' + oodPics[oodPicNum] + '.gif';
 			}
+			function setUpMusicPlayer() {
+				musicPlayer = document.querySelector('audio');
+				unmuteButton = document.getElementById('unmuteButton');
+				
+				musicPlayer.addEventListener('play', function () {
+					unmuteButton.classList.remove('visible');
+				});
+				if (musicPlayer.paused || musicPlayer.muted || musicPlayer.volume === 0) {
+					// If the player is paused at this point, the
+					// browser presumably blocked audio autoplay.
+					unmuteButton.addEventListener('click', playMusic);
+					unmuteButton.classList.add('visible');
+				}
+			}
+			function playMusic() {
+				musicPlayer.muted = false;
+				musicPlayer.volume = (musicPlayer.volume || 1);
+				musicPlayer.play();
+			}
 			window.onload = function () {
 				document.getElementById('oodPic').onclick = nextOodPic;
+				setUpMusicPlayer();
 			};
 		</script>
 	</head>
 	<body>
-		<div id="gif">
+		<section id="gif">
 			<h1>Sax-Ood-Roll'd</h1>
 			<img src="images/got_them_moves.gif" alt="" id="oodPic" />
-		</div>
-		<audio autoplay="autoplay" loop="loop">
-			<source src="audio/saxroll.mp3" type="audio/mp3"/>
-			<source src="audio/saxroll.ogg" type="audio/ogg"/>
-			Please switch to a browser that supports HTML5 audio
-		</audio>
+			<audio autoplay="autoplay" loop="loop">
+				<source src="audio/saxroll.mp3" type="audio/mp3"/>
+				<source src="audio/saxroll.ogg" type="audio/ogg"/>
+				Please switch to a browser that supports HTML5 audio.
+			</audio>
+			<button id="unmuteButton" title="Unmute" aria-label="Unmute music.">&#x1f507;</button>
+		</section>
 		<footer id="links">
 			By <a href="http://zmyaro.com" target="_blank">Zachary Yaro</a>
 			|

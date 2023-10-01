@@ -19,6 +19,9 @@ a:visited {
 	}
 
 #gif {
+	/* Ensure the image can be scrolled above the footer in a short window. */
+	margin-bottom: 3em;
+	
 	/*color: black;
 	text-shadow: 0px 0px 8px white;*/
 	text-shadow: 0px 0px 8px black;
@@ -27,12 +30,42 @@ a:visited {
 		font-size: 40px;
 	}
 	#gif img {
+		display: block;
+		margin: 1em auto;
 		max-width: 100%;
-		/* Ensure the image can be scrolled above the footer in a short window. */
-		margin-bottom: 3em;
 		
 		box-shadow: 0px 0px 16px 8px white;
 		/*box-shadow: 0px 0px 16px 8px black;*/
+	}
+
+#unmuteButton {
+	display: none; /* Only shown if the browser auto-mutes. */
+	
+	background: transparent;
+	border: 0 none;
+	
+	font-size: 3em;
+	text-shadow:
+		0px 0px 4px rgba(0, 0, 0, 0.5),
+		0px 0px 8px white,
+		0px 0px 8px white;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	
+	transition: 0.1s text-shadow;
+}
+	#unmuteButton.visible {
+		display: inline-block;
+	}
+	#unmuteButton:hover,
+	#unmuteButton:focus {
+		text-shadow:
+			0px 0px 4px rgba(0, 0, 0, 0.5),
+			0px 0px 12px white,
+			0px 0px 12px white;
+	}
+	#unmuteButton:active {
+		opacity: 0.8;
 	}
 
 #links {
