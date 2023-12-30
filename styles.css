@@ -70,11 +70,13 @@ a:visited {
 
 #links {
 	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	padding: 2px;
-	font-size: 0.875em;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 4px;
+	
+	font-size: 80%;
+	text-align: center;
 	
 	background-color: white;
 	background-color: rgba(255,255,255,0.4);
